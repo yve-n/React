@@ -5,7 +5,8 @@ const App = () => {
 
 return (
     <>
-       <ul style={{backgroundColor: 'red'}}>
+        <button>select next name</button>
+       <ul style={{backgroundColor: 'aqua'}}>
            {names.map((name,index) =><li key={index}>{name}</li>)}
        </ul>
     </>
