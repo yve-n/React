@@ -1,34 +1,28 @@
-import { useState } from "react";
-
+import {Link, Route, Routes} from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
+import NotFound from "./components/NotFound";
+import AboutYve from "./components/AboutYve";
+import AboutAmel from "./components/AboutAmel";
 const App = () => {  
-    const names =['noam', 'amel','yve'];
+    return(
+        <>
+        <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about-us">About</Link></li>
+        </ul>
+            <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/about-us" element={<About />}>
+                    <Route path="/about-us/yve" element={<AboutYve />} />
+                    <Route path="/about-us/amel" element={<AboutAmel />} />
+                </Route>
+
+                <Route path="*" element={<NotFound />}></Route>
+            </Routes>  
+        </>
     
-
-    let [currentActive, setCurrentActive] = useState(0);
-    const ChangeColor = () =>{
-        if(currentActive === names.length - 1){
-            setCurrentActive(0);
-            return;
-        }
-        setCurrentActive(currentActive + 1);
-
-    }
-   
-    
-
-return (
-    <>
-        <button onClick={ChangeColor}>select next name</button>
-       <ul style={{backgroundColor:'aqua'}}>
-           {names.map((name,index) =><li 
-           style ={{backgroundColor :currentActive ===index ?'blue' : "transparent"}}
-           key={index} >{name}</li>)}
-       </ul>
-       
-        
-    </>
-)
-
+    );
 }
 
 export default App;
