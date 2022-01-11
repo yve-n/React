@@ -1,14 +1,21 @@
-import {Link, Outlet} from "react-router-dom";
-
+import { Link, Outlet } from "react-router-dom";
+import Card from "./Card";
 const About = () => {
+    const persons = [
+        { "name": "Yve", "age": 25 , profile: '/about-us/yve' },
+        { "name": "Amel", "age": 4 },
+        { "name": "Noam", "age": 1 }
+      ];
     return (
         <>
+        {persons.map((person,index) =>{
+            return(
+            <Card key={index} data={{title:person.name, text:person.age, cta:person.profile}}/>
+        )
+        })}
+
         <Outlet />
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos cumque nesciunt voluptatibus non laboriosam natus quidem sapiente, nobis ipsam expedita aut distinctio nisi corrupti culpa, deserunt, nulla exercitationem sit magnam.</p>
-        <ul>
-            <li><Link to="/about-us/yve">Yve</Link></li>
-            <li><Link to="/about-us/amel">Amel</Link></li>
-        </ul>
+
         </>
     )
 }

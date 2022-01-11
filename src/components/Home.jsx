@@ -1,33 +1,28 @@
 import { useEffect, useState } from "react";
-import {persons} from '../data';
+import { Link } from "react-router-dom";
+
 const Home = () => {
-
-    const [name, setName] = useState('');
-    useEffect(()=>{
-        fetch('http://localhost:5000/profile')
-    .then(response => response.json())
-    .then(profile => setName(profile.name))
-    .catch(error =>console.error(error));
-    },[]);
-    
-    // const [isYve, setIsYve]= useState(false);
-    // const [isAmel, setAmel] = useState(true);
-
-    // const [ps, setPersons] = useState([]);
-
-    // useEffect(()=>{
-    //     setName(name === 'Yve' ? 'Amel' : 'Yve');
-    // },[isYve]);
-
-    // useEffect(()=>{
-    //     setPersons(persons);
-    // },[]);
-
+    const products = [
+        { "name": "Yve", "price": 25  },
+        { "name": "Amel", "price": 4  },
+        { "name": "Noam", "price": 1 }
+      ];
     return (
         <>
-            {/* {ps.map(person=> <p key={person.age}>{person.name}</p>)}
-            <h3 onClick={()=>{setIsYve(!isYve)}}>{name}</h3> */}
-            { <h2>Hello {name}</h2>}
+        {products.map((product,index) =>{
+            return(
+             <div key={index} className="card" style={{width: '18rem'}}>
+             <div className="card-body">
+                 <img src="http://images.computerhistory.org/revonline/images/102633685p-03-03.jpg?w=600" className="card-img-top" alt="" />
+                 <h5 className="card-title">{product.name}</h5>
+                 <p className="card-text">{product.price}</p>
+                 <Link to="/" className="btn btn-primary">Go</Link>
+                 <Link to="/" className="btn btn-success">Buy</Link>
+             </div>
+        </div>
+        )
+        })}
+        
         </>
     )
 }
