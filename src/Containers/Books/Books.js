@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import AddBook from "./AddBook/AddBook";
 
 class Books extends Component{
 
@@ -83,6 +84,7 @@ class Books extends Component{
                 </tbody>
 
             </table>
+            <AddBook />
             
             </>
         )
