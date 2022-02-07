@@ -52,7 +52,7 @@ class Books extends Component{
     render(){
         return(
             <>
-            <table className="table table-center">
+            <table className="table table-stripped text-center">
                 <thead>
                     <tr>
                         <th>Titre</th>
@@ -64,6 +64,21 @@ class Books extends Component{
                     </tr>
                 </thead>
                 <tbody>
+                   { this.state.books.map(book =>{
+                        return(
+                            <tr key={book.id}>
+                                <td>{book.name}</td>
+                                <td>{book.author}</td>
+                                <td>{book.year}</td>
+                                <td>{book.price}</td>
+                                <td>{book.country}</td>
+                                <td><button className="btn btn-success">Edit</button></td>
+                                <td><button className="btn btn-danger">Delete</button></td>
+
+                            </tr>
+                        )
+                    })
+                    }
 
                 </tbody>
 
