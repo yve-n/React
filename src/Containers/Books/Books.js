@@ -50,6 +50,10 @@ class Books extends Component{
         ]
 
     }
+    addBookHandler = (book) =>{
+        console.log("nom du livre " + book.name)
+
+    }
     render(){
         return(
             <>
@@ -82,9 +86,9 @@ class Books extends Component{
                     }
 
                 </tbody>
-
             </table>
-            <AddBook />
+
+            <AddBook addBookAction={(book) =>this.addBookHandler(book)}/>
             
             </>
         )
