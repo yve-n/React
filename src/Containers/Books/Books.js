@@ -1,55 +1,13 @@
 import React,{Component} from "react";
 import AddBook from "./AddBook/AddBook";
 import axios from 'axios';
+import UpdateBook from "./UpdateBook/UpdateBook";
 
 class Books extends Component{
 
     state={
-        books:
-        [
-            // {
-            //     "id": 1,
-            //     "name" : "Harry Potter",
-            //     "author" : "J.K Rowling",
-            //     "year" : 1997,
-            //     "price" : 50.0,
-            //     "country" : "UK"
-            // },
-            // {
-            //     "id": 2,
-            //     "name" : "Lord of the Rings",
-            //     "author" : "J.R.R Tolkien",
-            //     "year" : 1954,
-            //     "price" : 39.0,
-            //     "country" : "UK",
-            // },
-            // {
-            //     "id": 3,
-            //     "name" : "1984",
-            //     "author" : "George Orwell",
-            //     "year" : 1948,
-            //     "price" : 49.99,
-            //     "country" : "UK"
-            // },
-            // {
-            //     "id": 4,
-            //     "name" : "Artemis Fowl",
-            //     "author" : "Eoin Colfer",
-            //     "year" : 2001,
-            //     "price" : 44.99,
-            //     "country" : "Irish"
-            // },
-            // {
-            //     "id": 5,
-            //     "name" : "Mathilda",
-            //     "author" : "Roald Dahl",
-            //     "year" : 1988,
-            //     "price" : 24.99,
-            //     "country" : "UK"
-            // }
-
-        ]
-
+        books:[],
+        bookToModify:0
     }   
 
     componentDidMount =()=>{
@@ -84,6 +42,29 @@ class Books extends Component{
                 // console.log(error)
             });
     }
+    handleDelete =(id) =>{
+        console.log("supprimer le livre : " + id);
+        const index = this.state.books.findIndex(book=>{
+            return book.id === id
+        })
+        console.log("index du livre: " + index)
+        const books =[...this.state.books];
+        books.splice(index, 1);
+        this.setState({books: books})
+    }
+    handleUpdate = (book) =>{
+        console.log("Livre à modifier : " + book.name);
+        const index = this.state.books.findIndex(b => {
+            return b.id === book.id
+        });
+        const books = [...this.state.books];
+        books[index] = book;
+        this.setState({books, bookToModify: 0})
+
+    }
+    setToModify =(id)=>{
+        this.setState({bookToModify:id})
+    }
     render(){
         return(
             <>
@@ -100,18 +81,26 @@ class Books extends Component{
                 </thead>
                 <tbody>
                    { this.state.books.map(book =>{
-                        return(
-                            <tr key={book.id}>
-                                <td>{book.name}</td>
-                                <td>{book.author}</td>
-                                <td>{book.year}</td>
-                                <td>{book.price}</td>
-                                <td>{book.country}</td>
-                                <td><button className="btn btn-success">Edit</button></td>
-                                <td><button className="btn btn-danger">Delete</button></td>
-
-                            </tr>
-                        )
+                       if(book.id !== this.state.bookToModify){
+                           return(
+                               <tr key={book.id}>
+                                   <td>{book.name}</td>
+                                   <td>{book.author}</td>
+                                   <td>{book.year}</td>
+                                   <td>{book.price}</td>
+                                   <td>{book.country}</td>
+                                   <td><button onClick={()=>this.setToModify(book.id)} className="btn btn-success">Edit</button></td>
+                                   <td><button onClick={() =>this.handleDelete(book.id)} className="btn btn-danger">Delete</button></td>
+   
+                               </tr>
+                           )
+                       }else{
+                            return(
+                                <tr key={book.id}>
+                                    <UpdateBook modifyBook={(book) => this.handleUpdate(book)} {...book} />
+                                </tr>
+                            )
+                       }
                     })
                     }
 

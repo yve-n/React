@@ -93,8 +93,9 @@ export default  withFormik({
         country: Yup.string()
                 .required("le pays est requis")
     }),
-    handleSubmit : (values,{props}) =>{
+    handleSubmit : (values,{props, resetForm}) =>{
         // console.log(values);
         props.addBookAction(values);
+        resetForm();
     }
 })( AddBook);
