@@ -51,8 +51,12 @@ class Books extends Component{
 
     }
     addBookHandler = (book) =>{
-        console.log("nom du livre " + book.name)
-
+        console.log("nom du livre " + book.name);
+        const books =[...this.state.books];
+        const id = Math.max(...books.map(b => b.id), 0) + 1;
+        book.id = id;
+        books.push(book);
+        this.setState({books: books});
     }
     render(){
         return(

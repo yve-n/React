@@ -23,13 +23,13 @@ class AddBook extends Component{
             </div>
             <div className="mb-3">
                 <label htmlFor="year" className="form-label">Année : </label>
-                <input type="text" className="form-control" id="year" 
+                <input type="number" className="form-control" id="year" 
                 value={this.props.values.year} 
                 onChange={this.props.handleChange}/>
             </div>
             <div className="mb-3">
                 <label htmlFor="price" className="form-label">Prix : </label>
-                <input type="text" className="form-control" id="price" 
+                <input type="number" className="form-control" id="price" 
                 value={this.props.values.price} 
                 onChange={this.props.handleChange}/>
             </div>
